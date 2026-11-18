@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const { GoogleGenAI } = require('@google/genai');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,7 +24,7 @@ Aturan menjawab:
 9. Tolak dengan sopan pertanyaan di luar bidang teknik, mesin, dan industri, lalu arahkan kembali ke topik teknis.`;
 
 app.use(express.json({ limit: '15mb' }));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const limiter = rateLimit({
   windowMs: 60 * 1000,
